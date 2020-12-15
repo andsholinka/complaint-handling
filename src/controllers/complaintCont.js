@@ -148,7 +148,7 @@ complaintRouter.get('/complaints', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -163,7 +163,7 @@ complaintRouter.get('/complaints', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`${cust.username} Has no Authority`);
+            res.status(401).send(`${cust.username} Has no Authority`);
         }
     })
 });
