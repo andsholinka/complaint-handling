@@ -89,22 +89,22 @@ spvRouter.post('/login', async (req, res) => {
                             auth: true,
                             token: token
                         });
-                        res.status(201).json({
+                        res.status(200).json({
                             "status": "logged in!"
                         });
                     } else {
-                        res.status(201).json({
+                        res.status(401).json({
                             "status": "wrong password."
                         });
                     }
                 });
             } else {
-                res.status(201).json({
+                res.status(401).json({
                     "status": "username not Active"
                 });
             }
         } else {
-            res.status(201).json({
+            res.status(401).json({
                 "status": "username not found"
             });
         }

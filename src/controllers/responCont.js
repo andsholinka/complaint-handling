@@ -27,7 +27,7 @@ responRouter.post('/create/:idComplaint', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -59,7 +59,7 @@ responRouter.post('/create/:idComplaint', async (req, res) => {
                 res.status(400).send(err);
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
@@ -76,7 +76,7 @@ responRouter.put('/update-tag/:idRespon', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -109,7 +109,7 @@ responRouter.put('/update-tag/:idRespon', async (req, res) => {
                 res.status(400).send(err);
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
@@ -126,7 +126,7 @@ responRouter.put('/update-rating/:idRespon', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -156,7 +156,7 @@ responRouter.put('/update-rating/:idRespon', async (req, res) => {
                 res.status(400).send(err);
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
@@ -173,7 +173,7 @@ responRouter.get('/get-all-respon', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -189,7 +189,7 @@ responRouter.get('/get-all-respon', async (req, res) => {
             }
         } else {
 
-            res.status(500).send(`Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 
@@ -207,7 +207,7 @@ responRouter.get('/get-respon-by-cs', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -224,7 +224,7 @@ responRouter.get('/get-respon-by-cs', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 
@@ -244,7 +244,7 @@ responRouter.get('/akumulasiRating', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -281,7 +281,7 @@ responRouter.get('/akumulasiRating', async (req, res) => {
             }
         } else {
 
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 })

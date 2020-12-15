@@ -56,7 +56,7 @@ complaintRouter.post('/upload-gambar', upload.single('image'), (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -81,7 +81,7 @@ complaintRouter.post('/upload-gambar', upload.single('image'), (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`${cust.username} Has no Authority`);
+            res.status(401).send(`${cust.username} Has no Authority`);
         }
     })
 });
@@ -99,7 +99,7 @@ complaintRouter.post('/create', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -131,7 +131,7 @@ complaintRouter.post('/create', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`${cust.username} Has no Authority`);
+            res.status(401).send(`${cust.username} Has no Authority`);
         }
     })
 });
@@ -180,7 +180,7 @@ complaintRouter.get('/check', function (req, res) {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });

@@ -127,7 +127,7 @@ customerRouter.put('/detail', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -148,7 +148,7 @@ customerRouter.put('/detail', async (req, res) => {
             res.send(updateDataCust);
 
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 })
@@ -250,7 +250,7 @@ customerRouter.post('/change-password', async (req, res) => {
         jwt.verify(token, Conf.secret, async (err, decoded) => {
 
             if (err)
-                return res.status(500).send({
+                return res.status(401).send({
                     auth: false,
                     message: 'Failed to authenticate token.'
                 })
@@ -272,7 +272,7 @@ customerRouter.post('/change-password', async (req, res) => {
             if (currentCustomer[0]) {
                 bcrypt.compare(password, currentCustomer[0].password).then(async (result, err) => {
                     if (result) {
-                        if (err) return res.status(201).json("There is a problem registering the user")
+                        if (err) return res.status(401).json("There is a problem when change the password")
                         const customer = currentCustomer[0]
 
                         // Hashed Password
@@ -292,13 +292,13 @@ customerRouter.post('/change-password', async (req, res) => {
                             "status": "Successfully Changed Pasword!!"
                         })
                     } else {
-                        res.status(201).json({
+                        res.status(401).json({
                             "status": "wrong password"
                         })
                     }
                 })
             } else {
-                res.status(201).json({
+                res.status(401).json({
                     "status": "email not found"
                 })
             }
@@ -384,7 +384,7 @@ customerRouter.get('/customers', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -399,7 +399,7 @@ customerRouter.get('/customers', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`${cust.username} Has no Authority`);
+            res.status(401).send(`${cust.username} Has no Authority`);
         }
     })
 });

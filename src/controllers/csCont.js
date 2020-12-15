@@ -25,7 +25,7 @@ csRouter.post('/registration', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -73,7 +73,7 @@ csRouter.post('/registration', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(`Has no Authority`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
@@ -158,7 +158,7 @@ csRouter.put('/edit-status/:id', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -179,7 +179,7 @@ csRouter.put('/edit-status/:id', async (req, res) => {
                 })
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 })
@@ -196,7 +196,7 @@ csRouter.get('/get-all-data/', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -212,7 +212,7 @@ csRouter.get('/get-all-data/', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
@@ -229,7 +229,7 @@ csRouter.delete('/delete-cs/:id', async (req, res) => {
 
     //verifikasi jwt
     jwt.verify(token, Conf.secret, async function (err, decoded) {
-        if (err) return res.status(500).send({
+        if (err) return res.status(401).send({
             auth: false,
             message: 'Failed to authenticate token.'
         });
@@ -247,7 +247,7 @@ csRouter.delete('/delete-cs/:id', async (req, res) => {
                 });
             }
         } else {
-            res.status(500).send(` Tidak Memiliki Wewenang`);
+            res.status(401).send(`Has no Authority`);
         }
     })
 });
